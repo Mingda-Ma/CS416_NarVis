@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 Visualization Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #4a4a4a;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .story-container {
+            width: 90%;
+            max-width: 1200px;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .visualization-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .map-area {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .chart-area {
+            width: 900px;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #narrative-text {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+
+        #progress-container {
+            width: 80%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+            width: 0%;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .controls button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+
+        .controls button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .info-panel {
+            width: 30%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .info-panel h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .info-panel p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Global COVID-19 Confirmed Cases</h1>
+    </div>
+
+    <div class="story-container">
+        <div id="slide-1" class="slide">
+            <div class="slide-content">
+                <div class="visualization-container">
+                    <div id="map-area-1" class="map-area"></div>
+                    <div id="chart-area-1" class="chart-area"></div>
+                </div>
+                <div class="info-panel">
+                    <h2>Europe's Early Struggle</h2>
+                    <p>Europe was one of the first regions to be heavily impacted by the pandemic. The virus spread rapidly across borders, leading to widespread lockdowns and a significant spike in confirmed cases. The continent's healthcare systems were tested, and a global effort to contain the virus began.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-2" class="slide">
+            <div class="slide-content">
+                <div class="visualization-container">
+                    <div id="map-area-2" class="map-area"></div>
+                    <div id="chart-area-2" class="chart-area"></div>
+                </div>
+                <div class="info-panel">
+                    <h2>Asia's Mixed Response</h2>
+                    <p>As the origin of the pandemic, Asia's countries showed a mixed response. Some regions implemented strict and effective control measures early on, while others saw significant waves of infection later. This slide highlights the diverse impact and outcomes across the world's largest continent.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="slide-3" class="slide">
+            <div class="slide-content">
+                <div class="visualization-container">
+                    <div id="map-area-3" class="map-area"></div>
+                    <div id="chart-area-3" class="chart-area"></div>
+                </div>
+                <div class="info-panel">
+                    <h2>The Americas: A Different Path</h2>
+                    <p>North and South America experienced a unique trajectory of the pandemic. From the widespread impact in the United States to the significant challenges faced by countries in South America, the two continents faced parallel and distinct battles against the virus, with varying peaks and case counts.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="slide-4" class="slide">
+            <div class="slide-content">
+                <div class="visualization-container">
+                    <div id="map-area-4" class="map-area"></div>
+                    <div id="chart-area-4" class="chart-area"></div>
+                </div>
+                <div class="info-panel">
+                    <h2>Interactive World Overview</h2>
+                    <p>This is the final view. You can now explore the data for any continent. Simply hover your cursor over a continent to highlight it, or click to view its detailed case curve. Click on the ocean to return to the global view.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn" disabled>Previous</button>
+            <button id="nextBtn">Next</button>
+        </div>
+    </div>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="main.js"></script>
+</body>
+</html>
